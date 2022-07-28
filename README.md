@@ -1,0 +1,1 @@
+# battlezips-ceramic-schema
