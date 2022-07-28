@@ -1,0 +1,11 @@
+{
+  "definitions": {
+    "myBattlezipProfile": "kjzl6cwe1jw14asrt2y2ko5o8zywqg6znwklbvogmzuwvtb6jbl7kqyacayt8hh"
+  },
+  "schemas": {
+    "Battlezips": "ceramic://k3y52l7qbv1fry1gqn90kvjerfsvevndjbl982cfez6nxd9qxjy8huieebwogazgg"
+  },
+  "tiles": {
+    "exampleBattlezipProfile": "kjzl6cwe1jw14aeqlvhvgphum2ndkzyx03ur4suolinlgr2gkg6j85wqhzj5z19"
+  }
+}

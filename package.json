@@ -1,0 +1,30 @@
+{
+  "name": "glaze-practice",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "deploy": "node ./src/scripts/deployment.js",
+    "test": "mocha ./src/tests/test.js"
+  },
+  "keywords": [],
+  "author": "",
+  "type": "module",
+  "license": "ISC",
+  "dependencies": {
+    "@ceramicnetwork/http-client": "^2.3.0",
+    "@glazed/datamodel": "^0.3.1",
+    "@glazed/devtools": "^0.2.0",
+    "@glazed/did-datastore": "^0.3.2",
+    "dids": "^3.2.0",
+    "dotenv": "^16.0.1",
+    "fs": "^0.0.1-security",
+    "key-did-provider-ed25519": "^2.0.1",
+    "key-did-resolver": "^2.0.5",
+    "uint8arrays": "^3.0.0"
+  },
+  "devDependencies": {
+    "chai": "^4.3.6",
+    "mocha": "^10.0.0"
+  }
+}
