@@ -8,8 +8,7 @@ import { getResolver } from 'key-did-resolver';
 import modelAliases from '../deployment/deployment.json' assert { type: 'json' };
 import { expect } from 'chai';
 
-// TODO: Feed in from .env
-const API_URL = 'https://ceramic-clay.3boxlabs.com';
+const { API_URL } = process.env;
 
 // TODO: Auto generate DIDs
 // const did1 = 'did:key:z6MkhFtXTbV4wyKZKBCNpEufEbZDpdVryqXhs9LCpGDGq5pT';
@@ -68,10 +67,19 @@ describe('Test Battlezip game', async () => {
   });
 
   describe('Test profile assignments', async () => {
-    it('Should revert if Battlezip profile is initialized without proper parameters', async () => {
+    xit('Should revert if Battlezip profile is initialized without either required parameters', async () => {
       try {
         await store1.set('myBattlezipProfile', {
           text: 'Invalid input.',
+        });
+      } catch (err) {
+        console.log('Error: ', err);
+      }
+    }).timeout(10000);
+    it('Should revert if Battlezip profile is initialized without one required parameter', async () => {
+      try {
+        await store1.set('myBattlezipProfile', {
+          totalGames: 0,
         });
       } catch (err) {
         console.log('Error: ', err);
