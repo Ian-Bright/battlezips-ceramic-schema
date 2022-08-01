@@ -10,7 +10,7 @@ import fs from 'fs';
 dotenv.config();
 
 const { API_URL, DID_SEED } = process.env;
-const DEPLOY_DIR = 'deployment';
+const DEPLOY_DIR = './src/deployment';
 
 const authenticateDID = async () => {
   const key = fromString(DID_SEED, 'base16');
@@ -35,22 +35,27 @@ const createSchema = async (manager) => {
     $schema: 'http://json-schema.org/draft-07/schema#',
     title: 'Battlezips',
     type: 'object',
-    required: ['activeGames', 'totalGames'],
     properties: {
-      activeGames: {
-        type: 'array',
-        description: 'List of active games a user is involved with',
-        items: {
-          type: 'object',
-          default: '{}',
-          properties: {
-            shipPositions: {
+      activeGame: {
+        type: 'object',
+        description: 'State of active game a user is playing',
+        title: 'Active Game',
+        properties: {
+          shipPositions: {
+            type: 'array',
+            items: {
               type: 'array',
               items: {
                 type: 'number',
               },
             },
-            shots: {
+            maxItems: 5,
+            minItems: 5,
+          },
+          shots: {
+            type: 'array',
+            // Store x-cord, y-cord, and hit / miss (0 or 1)
+            items: {
               type: 'array',
               items: {
                 type: 'number',
@@ -58,19 +63,24 @@ const createSchema = async (manager) => {
             },
           },
         },
-      },
-      totalGames: {
-        type: 'number',
-        title: 'Total games',
+        required: ['shipPositions', 'shots'],
+        additionalProperties: false,
       },
     },
+    required: ['activeGame'],
+    additionalProperties: false,
   });
 };
 
 const createTile = async (manager, schemaID) => {
   return await manager.createTile(
     'exampleBattlezipProfile',
-    { activeGames: [], totalGames: 0 },
+    {
+      activeGame: {
+        shipPositions: [[], [], [], [], []],
+        shots: [],
+      },
+    },
     { schema: manager.getSchemaURL(schemaID) }
   );
 };
