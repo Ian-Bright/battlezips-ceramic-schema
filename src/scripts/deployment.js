@@ -41,6 +41,26 @@ const createSchema = async (manager) => {
         description: 'State of active game a user is playing',
         title: 'Active Game',
         properties: {
+          adversaryProof: {
+            // Adversary proof initally null if you have started game
+            type: ['string', 'null'],
+            description: 'ZK Proof for game adversary',
+          },
+          adversaryPubkey: {
+            // Adversary public key initally null if you have started game
+            type: ['string', 'null'],
+            description: 'Public key of game adversary',
+          },
+          adversaryShots: {
+            type: 'array',
+            // Store x-cord, y-cord, and hit / miss (0 or 1)
+            items: {
+              type: 'array',
+              items: {
+                type: 'number',
+              },
+            },
+          },
           shipPositions: {
             type: 'array',
             items: {
@@ -63,11 +83,38 @@ const createSchema = async (manager) => {
             },
           },
         },
-        required: ['shipPositions', 'shots'],
+        required: [
+          'adversaryProof',
+          'adversaryPubkey',
+          'adversaryShots',
+          'shipPositions',
+          'shots',
+        ],
+        additionalProperties: false,
+      },
+      l2PrivKey: {
+        type: 'object',
+        description:
+          'EDDSA encrypted private key to interact with Battlezips rollup',
+        properties: {
+          version: {
+            type: 'string',
+          },
+          nonce: {
+            type: 'string',
+          },
+          ephemPublicKey: {
+            type: 'string',
+          },
+          ciphertext: {
+            type: 'string',
+          },
+        },
+        required: ['ciphertext', 'ephemPublicKey', 'nonce', 'version'],
         additionalProperties: false,
       },
     },
-    required: ['activeGame'],
+    required: ['activeGame', 'l2PrivKey'],
     additionalProperties: false,
   });
 };
@@ -77,8 +124,17 @@ const createTile = async (manager, schemaID) => {
     'exampleBattlezipProfile',
     {
       activeGame: {
+        adversaryProof: null,
+        adversaryPubkey: null,
+        adversaryShots: [],
         shipPositions: [[], [], [], [], []],
         shots: [],
+      },
+      l2PrivKey: {
+        ciphertext: '',
+        ephemPublicKey: '',
+        nonce: '',
+        version: '',
       },
     },
     { schema: manager.getSchemaURL(schemaID) }
