@@ -1,11 +1,1 @@
-{
-  "definitions": {
-    "myBattlezipProfile": "kjzl6cwe1jw148z2ybnt89aq19y0lnqbsaft79tcjxdpo9deivpbeyvtff0m9x5"
-  },
-  "schemas": {
-    "Battlezips": "ceramic://k3y52l7qbv1fryq3i81irb1f1wow5j4bbsab4x21y58k28bamh9qb10ba49c2da80"
-  },
-  "tiles": {
-    "exampleBattlezipProfile": "kjzl6cwe1jw147vofc2cqo4r5y4cct7pnkln54936nlbwf9psihducxwz1jkrk5"
-  }
-}
+{"definitions":{"myBattlezipProfile":"kjzl6cwe1jw145b791zhfx70slpyyjhbvd01cpjxk7a3eg8817gyjbpijkqvfls"},"schemas":{"Battlezips":"ceramic://k3y52l7qbv1frxmifaby2jtpfq3xsa2x3f7umxq66ctdx7c9pr352k7j1ot30cnpc"},"tiles":{"exampleBattlezipProfile":"kjzl6cwe1jw149n2g190bt3p5xsrhcu9zaj3lnyprat0p0l1i4qsq7ggkyafs8p"}}
