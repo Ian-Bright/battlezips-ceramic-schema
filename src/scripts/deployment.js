@@ -72,14 +72,24 @@ const createSchema = async (manager) => {
             maxItems: 5,
             minItems: 5,
           },
+          shipPositionsSignature: {
+            type: ['object', 'null'],
+            description: 'Digital signature proving ships were placed by user',
+            properties: {
+              R8: {
+                type: 'array',
+              },
+              S: {
+                type: 'string',
+              },
+            },
+            required: ['R8', 'S'],
+          },
           shots: {
             type: 'array',
-            // Store x-cord, y-cord, and hit / miss (0 or 1)
+            // Store array containing x-cord, y-cord, hit / miss (0 or 1), and shot signature
             items: {
-              type: 'array',
-              items: {
-                type: 'number',
-              },
+              type: ['array', 'object'],
             },
           },
         },
@@ -128,6 +138,7 @@ const createTile = async (manager, schemaID) => {
         adversaryPubkey: null,
         adversaryShots: [],
         shipPositions: [[], [], [], [], []],
+        shipPositionsSignature: null,
         shots: [],
       },
       l2PrivKey: {
